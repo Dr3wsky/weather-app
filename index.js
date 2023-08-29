@@ -20,7 +20,7 @@ async function fetchWeather(city) {
   try {
     // Assign api search url
     const apiKey = "1fdeb95185c145f0809201723232908";
-    const apiEndpoint = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
+    const apiEndpoint = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=3&aqi=yes&alerts=no`;
 
     const response = await fetch(apiEndpoint, { mode: "cors" });
     // Alert user if invalid city search
@@ -38,8 +38,9 @@ async function fetchWeather(city) {
 }
 
 function runSearch() {
-  const location = document.getElementById("location-search").value;
-  const currentWeather = fetchWeather(location);
+  const city = document.getElementById("location-search").value;
+
+  const currentWeather = fetchWeather(city);
   // displayWeather(currentWeather);
 }
 
