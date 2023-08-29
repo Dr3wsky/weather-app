@@ -1,11 +1,10 @@
 // const { data } = require("browserslist");
 
-// DOM handling
+// DOM handling, need to split out in to separate function for dom generation
 const display = document.getElementById("display");
 const searchBtn = document.getElementById("search-btn");
 const searchInput = document.getElementById("location-search");
 const searchError = document.getElementById("search-error");
-const apiBase = "https://api.weatherapi.com/v1/current.json?key=1fdeb95185c145f0809201723232908&q=";
 
 // Functions to search and return gifs
 
