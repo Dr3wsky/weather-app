@@ -9,21 +9,38 @@ const apiBase = "https://api.weatherapi.com/v1/current.json?key=1fdeb95185c145f0
 
 // Functions to search and return gifs
 
-async function fetchWeather(location) {
+// function convertData(data) {
+//   const {
+//     name = cityName,
+//     main: {temp: tempertature, feels_like: feels_like}
+//   }
+// }
+
+async function fetchWeather(city) {
   try {
-    const response = await fetch(apiBase.concat(location), { mode: "cors" });
-    const weatherData = await response.json();
-    searchError.textContent = "";
-    return weatherData;
-  } catch (e) {
-    searchError.textContent = "Invalid search, cannot find location. Try again.";
+    // Assign api search url
+    const apiKey = "1fdeb95185c145f0809201723232908";
+    const apiEndpoint = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}`;
+
+    const response = await fetch(apiEndpoint, { mode: "cors" });
+    // Alert user if invalid city search
+    if (!response.ok) {
+      searchError.textContent = `City "${city}" not found. Check search and try again`;
+    }
+    // Handle data
+    const data = await response.json();
+    // const data = convertData(await response.json());
+    return data;
+  } catch (error) {
+    alert(error);
+    return null;
   }
 }
 
 function runSearch() {
   const location = document.getElementById("location-search").value;
   const currentWeather = fetchWeather(location);
-  console.log(currentWeather);
+  // displayWeather(currentWeather);
 }
 
 // Event handlers

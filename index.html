@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gify Search</title>
+  <title>Forcast.io</title>
   <link rel="shortcut icon" href="favicon.ico" />
   <link rel="stylesheet" href="stylesheet.css" />
   <script src="index.js" defer></script>
@@ -15,18 +15,18 @@
   <div class="main">
     <div class="prompt">
       <p>
-        Fetch your gif!
+        Weather:
       </p>
     </div>
     <form id="search-input" action="#">
       <label for="location-search">
         <input type="text" id="location-search" required 
-        placeholder="WHERE?"
+        placeholder="Search city"
         oninvalid="this.setCustomValidity(' ')"/>
       </label>
     </form>
               <button class="btn-search" type="submit" id="search-btn">
-          GENERATE
+          SEARCH
         </button>
     <div id="search-error" class="error"></div>
         <div id="display">
