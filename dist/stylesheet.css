@@ -1,8 +1,10 @@
 /* Global Vars, html reset and custom fonts */
 :root {
     --primary-dark: rgba(38, 64, 63, 0.932);
+    --primary-light: rgb(74, 202, 198);
     --secondary-light: rgba(212, 164, 124, 0.932);
     --primary-light: rgb(249, 250, 251);
+    --title-font: "Vanilla Whale"
     --primary-font: "Hack";
     --secondary-font: "Philosopher";
 }
@@ -14,6 +16,24 @@
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+}
+
+@font-face {
+  font-family: "Philosopher";
+  src: url("Philosopher.woff2") format("woff2"),
+    url("Philosopher.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Vanilla Whale";
+  src: url("VanillaWhale-Regular.woff2") format("woff2"),
+    url("VanillaWhale-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
@@ -47,18 +67,13 @@ html body {
     justify-content: center;
     align-items: center;
     width: 100vw;
-    padding: 1rem;
+    padding: 2rem;
     color: var(--primary-dark);
-}
-
-.prompt {
-    font-size: 2rem;
-    padding: inherit;
 }
 
 input {
     font-size: 1rem;
-    margin: 1rem;
+    margin: 1.5rem 0 1rem 0;
     padding: 0.5rem;
 }
 
