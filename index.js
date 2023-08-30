@@ -1,19 +1,30 @@
-// const { data } = require("browserslist");
-
 // DOM handling, need to split out in to separate function for dom generation
 const display = document.getElementById("display");
 const searchBtn = document.getElementById("search-btn");
-const searchInput = document.getElementById("location-search");
+const searchInput = document.getElementById("city-search");
 const searchError = document.getElementById("search-error");
 
-// Functions to search and return gifs
-
-// function convertData(data) {
-//   const {
-//     name = cityName,
-//     main: {temp: tempertature, feels_like: feels_like}
-//   }
-// }
+// Parse fetched weather data and convert to separate objects
+function parseData(data) {
+  const location = {
+    country: data.location.country,
+    city: data.location.name,
+    date: data.location.localtime.slice(-5),
+    timeZone: data.location.localtime.slice(0, 10),
+  };
+  const current = {
+    condition: data.current.condition.text,
+    conditionIcon: data.current.condition.icon,
+    clouds: data.current.cloud,
+    precip: data.current.precip_mm,
+    temp: data.current.temp_c,
+    tempFeels: data.current.feelslike_c,
+    wind: data.current.wind_kph,
+    windGust: data.current.gust_kph,
+    windDir: data.current.wind_dir,
+  };
+  return [location, current];
+}
 
 async function fetchWeather(city) {
   try {
@@ -27,9 +38,7 @@ async function fetchWeather(city) {
       searchError.textContent = `City "${city}" not found. Check search and try again`;
     }
     // Handle data
-    const data = await response.json();
-    // const data = convertData(await response.json());
-    return data;
+    const [location, current] = parseData(await response.json());
   } catch (error) {
     alert(error);
     return null;
@@ -37,7 +46,7 @@ async function fetchWeather(city) {
 }
 
 function runSearch() {
-  const city = document.getElementById("location-search").value;
+  const city = document.getElementById("city-search").value;
 
   const currentWeather = fetchWeather(city);
   // displayWeather(currentWeather);
