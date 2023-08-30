@@ -1,4 +1,4 @@
-import weather from "./modules/weather.js";
+import weather from "./modules/weather";
 // import view from "./modules/view";
 
 // DOM handling, need to split out in to separate function for dom generation
