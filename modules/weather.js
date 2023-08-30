@@ -36,6 +36,7 @@ const weather = (() => {
       const [location, current] = parseData(await response.json());
       return [location, current];
     } catch (error) {
+      alert(error);
       return null;
     }
   }
