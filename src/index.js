@@ -39,6 +39,7 @@ async function fetchWeather(city) {
     }
     // Handle data
     const [location, current] = parseData(await response.json());
+    return [location, current];
   } catch (error) {
     alert(error);
     return null;
