@@ -8,20 +8,20 @@
   <title>Forcast.io</title>
   <link rel="shortcut icon" href="weather_icon.ico" />
   <link rel="stylesheet" href="stylesheet.css" />
-  <script src="index.js" defer></script>
+  <script src="main.js" defer></script>
 </head>
 
 <body>
   <div class="main">
-    <div class="prompt">
-      <p>
-        Weather:
-      </p>
+    <div class="search-container">
+      <h1>
+        What's the weather in _____ ?
+      </h1>
     </div>
     <form id="search-input" action="#">
-      <label for="location-search">
-        <input type="text" id="location-search" required 
-        placeholder="Search city"
+      <label for="city-search">
+        <input type="text" id="city-search" required 
+        placeholder="Search a   NEW city"
         oninvalid="this.setCustomValidity(' ')"/>
       </label>
     </form>
