@@ -68,10 +68,27 @@ async function fetchWeather(city) {
   }
 }
 
+function getPromiseState(promise) {
+  const pending = {
+    state: "pending",
+  };
+  return Promise.race([promise, pending]).then(
+    (value) => {
+      if (value === pending) {
+        return value;
+      }
+      return {
+        state: "resolved",
+        value,
+      };
+    },
+    (reason) => ({ state: "rejected", reason }),
+  );
+}
+
 function runSearch() {
   const city = document.getElementById("city-search").value;
-  const searchResult = fetchWeather(city);
-  updateDisplay(searchResult);
+  const searchResult = fetchWeather(city).then(updateDisplay(searchResult));
 }
 
 // Event handlers
