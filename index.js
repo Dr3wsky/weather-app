@@ -2,7 +2,6 @@
 // const display = document.getElementById("display");
 const searchBtn = document.getElementById("search-btn");
 const searchInput = document.getElementById("city-search");
-const searchError = document.getElementById("search-error");
 
 function parseData(data) {
   const location = {
@@ -28,19 +27,21 @@ function parseData(data) {
 async function fetchWeather(city) {
   try {
     // Assign api search url
+    const searchFeedback = document.getElementById("search-feedback");
+    searchFeedback.textContent = "Searching . . . ";
     const apiKey = "1fdeb95185c145f0809201723232908";
     const apiEndpoint = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=3&aqi=yes&alerts=no`;
 
     const response = await fetch(apiEndpoint, { mode: "cors" });
     // Alert user if invalid city search
     if (!response.ok) {
-      searchError.textContent = `City "${city}" not found. Check search and try again`;
+      searchFeedback.textContent = `City "${city}" not found. Check search and try again`;
     }
     // Handle data
     const [location, current] = parseData(await response.json());
+    searchFeedback.textContent = "";
     return [location, current];
   } catch (error) {
-    alert(error);
     return null;
   }
 }
