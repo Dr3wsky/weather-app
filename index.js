@@ -1,10 +1,20 @@
-// DOM handling, need to split out in to separate function for dom generation
 // const display = document.getElementById("display");
 const searchBtn = document.getElementById("search-btn");
 const searchInput = document.getElementById("city-search");
 
+// DOM handling and display generation, to be split into own module
+function makeCity(place) {
+  const country = document.createElement("div");
+}
+
+function updateDisplay(data) {
+  makeCity(data[0]);
+  // makeCurrent(data[1])
+}
+
+// Data handling, to be broken out into own module
 function parseData(data) {
-  const location = {
+  const place = {
     country: data.location.country,
     city: data.location.name,
     date: data.location.localtime.slice(-5),
@@ -21,7 +31,8 @@ function parseData(data) {
     windGust: data.current.gust_kph,
     windDir: data.current.wind_dir,
   };
-  return [location, current];
+  const forcast = {};
+  return { place, current, forcast };
 }
 
 async function fetchWeather(city) {
@@ -36,11 +47,12 @@ async function fetchWeather(city) {
     // Alert user if invalid city search
     if (!response.ok) {
       searchFeedback.textContent = `City "${city}" not found. Check search and try again`;
+    } else {
+      searchFeedback.textContent = "";
     }
     // Handle data
-    const [location, current] = parseData(await response.json());
-    searchFeedback.textContent = "";
-    return [location, current];
+    const data = parseData(await response.json());
+    return data;
   } catch (error) {
     return null;
   }
@@ -48,8 +60,9 @@ async function fetchWeather(city) {
 
 function runSearch() {
   const city = document.getElementById("city-search").value;
-  const currentWeather = fetchWeather(city);
-  console.log(currentWeather);
+  const searchResult = fetchWeather(city);
+  const finalData = parseData(searchResult);
+  updateDisplay(finalData);
 }
 
 // Event handlers
