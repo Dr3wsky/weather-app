@@ -3,12 +3,22 @@ const searchBtn = document.getElementById("search-btn");
 const searchInput = document.getElementById("city-search");
 
 // DOM handling and display generation, to be split into own module
-function makeCity(place) {
-  const country = document.createElement("div");
+function makeCity(city) {
+  const cityContainer = document.createElement("div");
+  cityContainer.className = "city-container";
+  const searchContainer = document.getElementById("search-container");
+  searchContainer.appendChild(cityContainer);
+
+  const keys = Object.keys(city);
+  keys.forEach((key) => {
+    const newDiv = document.createElement("div");
+    newDiv.className = `${key}`;
+    newDiv.textContent = `${city[key]}`;
+  });
 }
 
 function updateDisplay(data) {
-  makeCity(data[0]);
+  makeCity(data.place);
   // makeCurrent(data[1])
 }
 
