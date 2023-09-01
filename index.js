@@ -71,8 +71,7 @@ async function fetchWeather(city) {
 function runSearch() {
   const city = document.getElementById("city-search").value;
   const searchResult = fetchWeather(city);
-  const finalData = parseData(searchResult);
-  updateDisplay(finalData);
+  updateDisplay(searchResult);
 }
 
 // Event handlers
