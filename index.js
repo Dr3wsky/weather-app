@@ -76,8 +76,8 @@ async function fetchData(city) {
 }
 
 // Event handlers
-searchBtn.addEventListener("click", async () => {
-  await fetchData(searchInput.value)
+searchBtn.addEventListener("click", () => {
+  fetchData(searchInput.value)
     .then((weatherData) => updateDisplay(weatherData));
 });
 
