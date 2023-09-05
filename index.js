@@ -69,7 +69,6 @@ async function fetchData(city) {
     }
     // Handle data
     const data = parseData(await response.json());
-    console.log(data);
     return data;
   } catch (error) {
     return null;

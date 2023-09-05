@@ -5,9 +5,13 @@ Handle data for 2 objects:
 	- Forcast (3 day, rough)
 
 Create DOM handling funcs to: 
-	- create divs for location, current & forcast
-	- populate display
-	- erase if no results
+	- create divs for current & forcast
+	- Why double div to start??!!
+	- Fix so either: 
+		- Re-populates existing divs is already created
+		OR 
+		- Erases and recreates divs with new results. 
+	- erase if no results or new data
 
 Once have a working app: 
 	- create webpack structure
