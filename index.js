@@ -3,30 +3,37 @@ const searchBtn = document.getElementById("search-btn");
 const searchInput = document.getElementById("city-search");
 
 // DOM handling and display generation, to be split into own module
-function makeCity(city) {
+function makeCity(cityData) {
+  const searchContainer = document.getElementById("search-container");
+  const titleUpdate = document.getElementById("title");
+  titleUpdate.textContent = `What's the weather in ${cityData.city}?`;
+
+  // Make container for city data
   const cityContainer = document.createElement("div");
   cityContainer.className = "city-container";
-  const searchContainer = document.getElementById("search-container");
   searchContainer.appendChild(cityContainer);
 
-  const keys = Object.keys(city);
+  // Populate city data from data object
+  const keys = Object.keys(cityData);
   keys.forEach((key) => {
     const newDiv = document.createElement("div");
     newDiv.className = `${key}`;
-    newDiv.textContent = `${city[key]}`;
+    newDiv.textContent = `${cityData[key]}`;
+    cityContainer.appendChild(newDiv);
   });
+  console.log("Look at all my divs");
 }
 
 function updateDisplay(data) {
+  console.log("success");
   makeCity(data.place);
-  // makeCurrent(data[1])
 }
 
 // Data handling, to be broken out into own module
 function parseData(data) {
   const place = {
-    country: data.location.country,
     city: data.location.name,
+    country: data.location.country,
     date: data.location.localtime.slice(-5),
     timeZone: data.location.localtime.slice(0, 10),
   };
@@ -45,7 +52,7 @@ function parseData(data) {
   return { place, current, forcast };
 }
 
-async function fetchWeather(city) {
+async function fetchData(city) {
   try {
     // Assign api search url
     const searchFeedback = document.getElementById("search-feedback");
@@ -69,13 +76,12 @@ async function fetchWeather(city) {
   }
 }
 
-function runSearch() {
-  const city = document.getElementById("city-search").value;
-  fetchWeather(city);
-}
-
 // Event handlers
-searchBtn.onclick = runSearch;
+searchBtn.addEventListener("click", async () => {
+  await fetchData(searchInput.value)
+    .then((weatherData) => updateDisplay(weatherData));
+});
+
 searchInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     // e.preventDefault();
