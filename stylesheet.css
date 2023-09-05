@@ -71,6 +71,16 @@ html body {
     color: var(--primary-dark);
 }
 
+.search-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    padding: 2rem;
+    color: var(--primary-dark);
+}
+
 input {
     font-size: 1rem;
     margin: 1.5rem 0 1rem 0;
