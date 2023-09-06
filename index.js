@@ -6,9 +6,9 @@ const searchInput = document.getElementById("city-search");
 function makeCity(cityData) {
   // Update title with search query and grab city container
   const cityContainer = document.getElementById("city-container");
-  if (cityContainer.hasChildNodes()) {
-    cityContainer.innerHTML = "";
-  }
+  // if (cityContainer.hasChildNodes()) {
+  //   cityContainer.innerHTML = "";
+  // }
 
   const titleUpdate = document.getElementById("title");
   titleUpdate.textContent = `What's the weather in ${cityData.city}?`;
