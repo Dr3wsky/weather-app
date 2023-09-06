@@ -20,21 +20,37 @@ function makeCity(cityData) {
     newDiv.textContent = `${cityData[key]}`;
     cityContainer.appendChild(newDiv);
   });
-  console.log("Look at all my divs");
+  cityContainer.classList.add("visible");
+}
+
+function makeNowcast(currentWeather) {
+  const nowcastContainer = document.getElementById("nowcast-container");
+  if (nowcastContainer.hasChildNodes()) {
+    nowcastContainer.innerHTML = "";
+  }
+
+  // Populate nowcast from data object
+  const keys = Object.keys(currentWeather);
+  keys.forEach((key) => {
+    const newDiv = document.createElement("div");
+    newDiv.className = `${key}`;
+    newDiv.textContent = `${currentWeather[key]}`;
+    nowcastContainer.appendChild(newDiv);
+  });
 }
 
 function updateDisplay(data) {
-  console.log("success");
   makeCity(data.place);
+  makeNowcast(data.current);
 }
 
 // Data handling, to be broken out into own module
 function parseData(data) {
   const place = {
     city: data.location.name,
-    country: data.location.country,
-    date: data.location.localtime.slice(-5),
-    timeZone: data.location.localtime.slice(0, 10),
+    region: `${data.location.region}, ${data.location.country}`,
+    time: `Local Time: ${data.location.localtime.slice(-5)}`,
+    date: data.location.localtime.slice(0, 10),
   };
   const current = {
     condition: data.current.condition.text,
@@ -70,7 +86,6 @@ async function fetchData(city) {
     const data = response.json();
     return data;
   } catch (error) {
-    alert(error);
     return null;
   }
 }
@@ -79,12 +94,6 @@ async function fetchData(city) {
 searchBtn.addEventListener("click", () => {
   fetchData(searchInput.value)
     .then((data) => updateDisplay(parseData(data)));
-});
-
-searchInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    searchBtn.click();
-  }
 });
 
 form.addEventListener("submit", (e) => {

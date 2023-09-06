@@ -1,21 +1,21 @@
 /* Global Vars, html reset and custom fonts */
 :root {
-    --primary-dark: rgba(38, 64, 63, 0.932);
-    --primary-light: rgb(74, 202, 198);
-    --secondary-light: rgba(212, 164, 124, 0.932);
-    --primary-light: rgb(249, 250, 251);
-    --title-font: "Vanilla Whale";
-    --primary-font: "Hack";
-    --secondary-font: "Philosopher";
+  --primary-dark: rgba(38, 64, 63, 0.932);
+  --primary-light: rgb(74, 202, 198);
+  --secondary-light: rgba(212, 164, 124, 0.932);
+  /* --primary-light: rgb(249, 250, 251); */
+  --title-font: "Vanilla Whale";
+  --primary-font: "Hack";
+  --secondary-font: "Philosopher";
 }
 
 *,
 ::before,
 ::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
 @font-face {
@@ -37,54 +37,54 @@
 }
 
 @font-face {
-    font-family: Hack;
-    src: url("fonts/Hack-Regular.woff2") format("woff2"),
-        url("fonts/Hack-Regular.woff") format("woff");
-    font-weight: bold;
-    font-style: normal;
+  font-family: Hack;
+  src: url("fonts/Hack-Regular.woff2") format("woff2"),
+    url("fonts/Hack-Regular.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
 }
 
 html,
 body {
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    overflow-x: hidden;
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
 }
 
 html body {
-    font-size: 1.2rem;
-    padding: 0px;
-    margin: 0px;
-    font-family: Hack, Philosopher, "Lucida", "Roboto";
+  font-size: 1.2rem;
+  padding: 0px;
+  margin: 0px;
+  font-family: Hack, Philosopher, "Lucida", "Roboto";
 }
 
 /* Main Property assignment */
 .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    padding: 2rem;
-    color: var(--primary-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  padding: 2rem;
+  color: var(--primary-dark);
 }
 
 .search-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    padding: 0.5rem;
-    color: var(--primary-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  padding: 0.5rem;
+  color: var(--primary-dark);
 }
 
 input {
-    font-size: 1rem;
-    margin: 1.5rem 0 1rem 0;
-    padding: 0.5rem;
+  font-size: 1rem;
+  margin: 1.5rem 0 1rem 0;
+  padding: 0.5rem;
 }
 
 input:focus {
@@ -95,18 +95,8 @@ input:focus {
 }
 
 .error-message {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: rgb(255, 69, 100);
-}
-
-.input-error {
-  border: 2px solid rgb(255, 69, 100);
-}
-
-
-
-img {
-    width: 50vw;
 }
 
 .btn-search {
@@ -125,6 +115,29 @@ img {
 
 .btn-search:active {
   transform: scale(0.9);
+}
+
+.results-now-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  width: 100vw;
+  gap: 1.5rem;
+}
+
+.visible {
+  background-color: var(--primary-light);
+  border: 2px solid var(--primary-dark);
+  border-radius: 5px;
+  min-width: 464px;
+  padding: 0.3rem 1.1rem;
+}
+
+#nowcast-container {
+}
+
+#city-container {
 }
 
 .footer {
