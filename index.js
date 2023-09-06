@@ -1,15 +1,14 @@
 // const display = document.getElementById("display");
 const searchBtn = document.getElementById("search-btn");
+const form = document.getElementById("search-input");
 const searchInput = document.getElementById("city-search");
 
 // DOM handling and display generation, to be split into own module
 function makeCity(cityData) {
-  // Update title with search query and grab city container
   const cityContainer = document.getElementById("city-container");
-  // if (cityContainer.hasChildNodes()) {
-  //   cityContainer.innerHTML = "";
-  // }
-
+  if (cityContainer.hasChildNodes()) {
+    cityContainer.innerHTML = "";
+  }
   const titleUpdate = document.getElementById("title");
   titleUpdate.textContent = `What's the weather in ${cityData.city}?`;
 
@@ -64,12 +63,14 @@ async function fetchData(city) {
     // Alert user if invalid city search
     if (!response.ok) {
       searchFeedback.textContent = `City "${city}" not found. Check search and try again`;
+    } else {
+      searchFeedback.textContent = "";
     }
-    searchFeedback.textContent = "";
-
-    const data = (response.json());
+    // Handle data
+    const data = response.json();
     return data;
   } catch (error) {
+    alert(error);
     return null;
   }
 }
@@ -85,4 +86,8 @@ searchInput.addEventListener("keypress", (e) => {
     // e.preventDefault();
     searchBtn.click();
   }
+});
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 });
