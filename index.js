@@ -4,14 +4,14 @@ const searchInput = document.getElementById("city-search");
 
 // DOM handling and display generation, to be split into own module
 function makeCity(cityData) {
-  const searchContainer = document.getElementById("search-container");
+  // Update title with search query and grab city container
+  const cityContainer = document.getElementById("city-container");
+  if (cityContainer.hasChildNodes()) {
+    cityContainer.innerHTML = "";
+  }
+
   const titleUpdate = document.getElementById("title");
   titleUpdate.textContent = `What's the weather in ${cityData.city}?`;
-
-  // Make container for city data
-  const cityContainer = document.createElement("div");
-  cityContainer.className = "city-container";
-  searchContainer.appendChild(cityContainer);
 
   // Populate city data from data object
   const keys = Object.keys(cityData);
@@ -64,11 +64,10 @@ async function fetchData(city) {
     // Alert user if invalid city search
     if (!response.ok) {
       searchFeedback.textContent = `City "${city}" not found. Check search and try again`;
-    } else {
-      searchFeedback.textContent = "";
     }
-    // Handle data
-    const data = parseData(await response.json());
+    searchFeedback.textContent = "";
+
+    const data = (response.json());
     return data;
   } catch (error) {
     return null;
@@ -78,7 +77,7 @@ async function fetchData(city) {
 // Event handlers
 searchBtn.addEventListener("click", () => {
   fetchData(searchInput.value)
-    .then((weatherData) => updateDisplay(weatherData));
+    .then((data) => updateDisplay(parseData(data)));
 });
 
 searchInput.addEventListener("keypress", (e) => {
