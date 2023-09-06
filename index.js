@@ -83,7 +83,6 @@ searchBtn.addEventListener("click", () => {
 
 searchInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
-    // e.preventDefault();
     searchBtn.click();
   }
 });
