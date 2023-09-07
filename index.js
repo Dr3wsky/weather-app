@@ -28,6 +28,7 @@ function makeNowcast(currentWeather) {
   if (nowcastContainer.hasChildNodes()) {
     nowcastContainer.innerHTML = "";
   }
+  // nowcastContainer.style.backgroundImage = `${currentWeather[conditionIcon]}`;
 
   // Populate nowcast from data object
   const keys = Object.keys(currentWeather);
@@ -36,6 +37,13 @@ function makeNowcast(currentWeather) {
     newDiv.className = `${key}`;
     newDiv.textContent = `${currentWeather[key]}`;
     nowcastContainer.appendChild(newDiv);
+    // Create image for icon key
+    if (key === "conditionIcon") {
+      newDiv.innerHTML = "";
+      const icon = document.createElement("img");
+      icon.src = `${currentWeather[key]}`;
+      newDiv.appendChild(icon);
+    }
   });
 }
 
@@ -50,18 +58,14 @@ function parseData(data) {
     city: data.location.name,
     region: `${data.location.region}, ${data.location.country}`,
     time: `Local Time: ${data.location.localtime.slice(-5)}`,
-    date: data.location.localtime.slice(0, 10),
+    date: `Today: ${data.location.localtime.slice(0, 10)}`,
   };
   const current = {
-    condition: data.current.condition.text,
+    condition: `${data.current.temp_c} °C, ${data.current.condition.text}`,
     conditionIcon: data.current.condition.icon,
-    clouds: data.current.cloud,
-    precip: data.current.precip_mm,
-    temp: data.current.temp_c,
-    tempFeels: data.current.feelslike_c,
-    wind: data.current.wind_kph,
-    windGust: data.current.gust_kph,
-    windDir: data.current.wind_dir,
+    precip: `Precip: ${data.current.precip_mm} mm`,
+    wind: `Wind: ${data.current.wind_kph} kph, ${data.current.wind_dir}`,
+    feelsLike: `Gusting to ${data.current.gust_kph} kph, Feels like ${data.current.feelslike_c} °C`,
   };
   const forcast = {};
   return { place, current, forcast };
