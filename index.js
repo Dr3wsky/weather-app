@@ -5,7 +5,7 @@ const searchInput = document.getElementById("city-search");
 
 // DOM handling and display generation, to be split into own module
 function makeCity(cityData) {
-  const cityContainer = document.getElementById("city-container");
+  const cityContainer = document.getElementById("city");
   if (cityContainer.hasChildNodes()) {
     cityContainer.innerHTML = "";
   }
@@ -24,7 +24,7 @@ function makeCity(cityData) {
 }
 
 function makeNowcast(currentWeather) {
-  const nowcastContainer = document.getElementById("nowcast-container");
+  const nowcastContainer = document.getElementById("nowcast");
   if (nowcastContainer.hasChildNodes()) {
     nowcastContainer.innerHTML = "";
   }
@@ -45,6 +45,7 @@ function makeNowcast(currentWeather) {
       newDiv.appendChild(icon);
     }
   });
+  nowcastContainer.classList.add("visible");
 }
 
 function updateDisplay(data) {

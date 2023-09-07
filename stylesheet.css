@@ -1,7 +1,7 @@
 /* Global Vars, html reset and custom fonts */
 :root {
   --primary-dark: rgba(38, 64, 63, 0.932);
-  --primary-light: rgb(74, 202, 198);
+  --primary-light: rgba(115, 230, 226, 0.983);
   --secondary-light: rgba(212, 164, 124, 0.932);
   /* --primary-light: rgb(249, 250, 251); */
   --title-font: "Vanilla Whale";
@@ -120,24 +120,36 @@ input:focus {
 .results-now-container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   align-items: flex-start;
   width: 100vw;
   gap: 1.5rem;
 }
 
 .visible {
-  background-color: var(--primary-light);
   border: 2px solid var(--primary-dark);
   border-radius: 5px;
-  min-width: 464px;
-  padding: 0.3rem 1.1rem;
+  padding: 0.5rem 2rem;
 }
 
-#nowcast-container {
+.container > * {
+  padding: 0.2rem 0.5rem;
 }
 
-#city-container {
+#city {
+  background-color: var(--primary-light);
+  min-width: 321px;
+  max-width: max-content;
+  position: relative;
+  flex: 1;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#nowcast {
+  text-align: center;
 }
 
 .footer {
