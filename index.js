@@ -4,6 +4,30 @@ const form = document.getElementById("search-input");
 const searchInput = document.getElementById("city-search");
 
 // DOM handling and display generation, to be split into own module
+
+function setColors(div, data) {
+  // Change background color to match weather conditions
+  switch (data.condition.split(" ")[2]) {
+    case "Clear":
+      div.style.backgroundColor = "white";
+      break;
+    case "Sunny":
+      div.style.backgroundColor = "rgba(254, 254, 176, 0.983)";
+      break;
+    case "Partly":
+      div.style.backgroundColor = "rgba(186, 231, 230, 0.983)";
+      break;
+    case "Cloudy":
+      div.style.backgroundColor = "rgb(204, 210, 210)";
+      break;
+    case "Light":
+      div.style.backgroundColor = "rgba(220, 235, 241, 0.932)";
+      break;
+    default:
+      div.style.backgroundColor = "white";
+  }
+}
+
 function makeCity(cityData) {
   const cityContainer = document.getElementById("city");
   if (cityContainer.hasChildNodes()) {
@@ -28,7 +52,7 @@ function makeNowcast(currentWeather) {
   if (nowcastContainer.hasChildNodes()) {
     nowcastContainer.innerHTML = "";
   }
-  // nowcastContainer.style.backgroundImage = `${currentWeather[conditionIcon]}`;
+  setColors(nowcastContainer, currentWeather);
 
   // Populate nowcast from data object
   const keys = Object.keys(currentWeather);

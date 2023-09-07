@@ -1,8 +1,8 @@
 /* Global Vars, html reset and custom fonts */
 :root {
-  --primary-dark: rgba(38, 64, 63, 0.932);
-  --primary-light: rgba(115, 230, 226, 0.983);
-  --secondary-light: rgba(212, 164, 124, 0.932);
+  --primary-dark: rgba(20, 37, 37, 0.932);
+  --primary-light: rgba(139, 244, 241, 0.983);
+  --secondary-light: #dcebf1ee;
   /* --primary-light: rgb(249, 250, 251); */
   --title-font: "Vanilla Whale";
   --primary-font: "Hack";
@@ -150,6 +150,7 @@ input:focus {
 
 #nowcast {
   text-align: center;
+  min-width: min-content;
 }
 
 .footer {
