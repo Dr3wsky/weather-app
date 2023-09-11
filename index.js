@@ -17,7 +17,7 @@ function setColors(div, data) {
     case "Partly":
       div.style.backgroundColor = "rgba(186, 231, 230, 0.983)";
       break;
-    case "Cloudy":
+    case "Overcast":
       div.style.backgroundColor = "rgb(204, 210, 210)";
       break;
     case "Light":
@@ -72,9 +72,34 @@ function makeNowcast(currentWeather) {
   nowcastContainer.classList.add("visible");
 }
 
+function makeForcast(forcastData) {
+  const forecastContainer = document.getElementById("forecast");
+  if (forecastContainer.hasChildNodes()) {
+    forecastContainer.innerHTML = "";
+  }
+
+  // // Populate nowcast from data object
+  // const keys = Object.keys(currentWeather);
+  // keys.forEach((key) => {
+  //   const newDiv = document.createElement("div");
+  //   newDiv.className = `${key}`;
+  //   newDiv.textContent = `${currentWeather[key]}`;
+  //   nowcastContainer.appendChild(newDiv);
+  //   // Create image for icon key
+  //   if (key === "conditionIcon") {
+  //     newDiv.innerHTML = "";
+  //     const icon = document.createElement("img");
+  //     icon.src = `${currentWeather[key]}`;
+  //     newDiv.appendChild(icon);
+  //   }
+  // });
+  // nowcastContainer.classList.add("visible");
+}
+
 function updateDisplay(data) {
   makeCity(data.place);
   makeNowcast(data.current);
+  makeForcast(data.forcast);
 }
 
 // Data handling, to be broken out into own module
@@ -92,8 +117,28 @@ function parseData(data) {
     wind: `Wind: ${data.current.wind_kph} kph, ${data.current.wind_dir}`,
     feelsLike: `Gusting to ${data.current.gust_kph} kph, Feels like ${data.current.feelslike_c} °C`,
   };
-  const forcast = {};
-  return { place, current, forcast };
+  
+  data.forecast.forecastday.forEach((day) => {
+    let day = {
+    date: data.forecast.forecastday[day].date, 
+    condtionIcon: data.forecast.forecastday[day].day.condition.icon, 
+    condition: data.forecast.forecastday[day].day.condition.text, 
+    sunrise: `Sunrise: ${data.forecast.forecastday[day].astro.sunrise}`,
+    sunset: `Sunset: ${data.forecast.forecastday[day].astro.sunset}`,
+    maxTemps: `High: ${data.forecast.forecastday[day].day.maxtemp_c} °C`,
+    minTemps: `Low: ${data.forecast.forecastday[day].day.mintemp_c} °C`,
+    humidity: `${data.forecast.forecastday[day].day.avghumidity}% Humidity`,
+    if (data.forecast.forecastday[day].day.daily_will_it_snow) {
+      precip: `${data.forecast.forecastday[day].day.daily_chance_of_snow}% chance of snow`,
+      precipTotal: `${data.forecast.forecastday[day].day.totalsnow_cm}cm total snowfall`,
+    } 
+    else {
+      precip: `${data.forecast.forecastday[i].day.daily_chance_of_rain}% chance of rain`,
+      precipTotal: `${data.forecast.forecastday[i].day.totalprecip_mm}mm total precipitation`,
+    }
+  }})
+};
+  return { place, current, forecast };
 }
 
 async function fetchData(city) {
