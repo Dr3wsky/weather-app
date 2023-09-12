@@ -117,22 +117,23 @@ function parseData(data) {
     wind: `Wind: ${data.current.wind_kph} kph, ${data.current.wind_dir}`,
     feelsLike: `Gusting to ${data.current.gust_kph} kph, Feels like ${data.current.feelslike_c} °C`,
   };
-  
-  for (let day=0; day<data.forecast.forecastday.length; i++) {
-    let willSnow = data.forecast.forecastday[day].daily_will_it_snow;
-    let forecast[day] = {
-    date: data.forecast.forecastday[day].date, 
-    condtionIcon: data.forecast.forecastday[day].day.condition.icon, 
-    condition: data.forecast.forecastday[day].day.condition.text, 
-    sunrise: `Sunrise: ${data.forecast.forecastday[day].astro.sunrise}`,
-    sunset: `Sunset: ${data.forecast.forecastday[day].astro.sunset}`,
-    maxTemps: `High: ${data.forecast.forecastday[day].day.maxtemp_c} °C`,
-    minTemps: `Low: ${data.forecast.forecastday[day].day.mintemp_c} °C`,
-    humidity: `${data.forecast.forecastday[day].day.avghumidity}% Humidity`,
-    precip: ((willSnow)? `${data.forecast.forecastday[day].day.daily_chance_of_snow}% chance of snow`: `${data.forecast.forecastday[day].day.daily_chance_of_rain}% chance of rain`),
-    precipTotal: ((willSnow)`${data.forecast.forecastday[day].day.totalsnow_cm}cm total snowfall`: `${data.forecast.forecastday[i].day.totalprecip_mm}mm total precipitation`)
-    } 
-  };
+
+  for (let day = 0; day < data.forecast.forecastday.length; day++) {
+    const willSnow = data.forecast.forecastday[day].day.daily_will_it_snow;
+    forecast[day] = {
+      date: data.forecast.forecastday[day].date,
+      condtionIcon: data.forecast.forecastday[day].day.condition.icon,
+      condition: data.forecast.forecastday[day].day.condition.text,
+      sunrise: `Sunrise: ${data.forecast.forecastday[day].astro.sunrise}`,
+      sunset: `Sunset: ${data.forecast.forecastday[day].astro.sunset}`,
+      maxTemps: `High: ${data.forecast.forecastday[day].day.maxtemp_c} °C`,
+      minTemps: `Low: ${data.forecast.forecastday[day].day.mintemp_c} °C`,
+      humidity: `${data.forecast.forecastday[day].day.avghumidity}% Humidity`,
+      precip: ((willSnow) ? `${data.forecast.forecastday[day].day.daily_chance_of_snow}% chance of snow` : `${data.forecast.forecastday[day].day.daily_chance_of_rain}% chance of rain`),
+      precipTotal: ((willSnow) ? `${data.forecast.forecastday[day].day.totalsnow_cm}cm total snowfall` : `${data.forecast.forecastday[day].day.totalprecip_mm}mm total precipitation`),
+    };
+    console.log(forecast[day]);
+  }
   return { place, current, forecast };
 }
 
