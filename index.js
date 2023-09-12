@@ -78,24 +78,24 @@ function makeForecast(forecastData) {
     forecastContainer.innerHTML = "";
   }
 
-  console.log(forecastData);
+  let dayNum = 0;
+  forecastData.forEach((day) => {
+    dayNum++;
+    // Create Div for each day
+    const dayDiv = document.createElement("div");
+    dayDiv.className = "forecast-day";
+    dayDiv.setAttribute("data-day-num", `${dayNum}`);
+    forecastContainer.appendChild(dayDiv);
+    dayDiv.classList.add("visible");
 
-  // // Populate nowcast from data object
-  // const keys = Object.keys(currentWeather);
-  // keys.forEach((key) => {
-  //   const newDiv = document.createElement("div");
-  //   newDiv.className = `${key}`;
-  //   newDiv.textContent = `${currentWeather[key]}`;
-  //   nowcastContainer.appendChild(newDiv);
-  //   // Create image for icon key
-  //   if (key === "conditionIcon") {
-  //     newDiv.innerHTML = "";
-  //     const icon = document.createElement("img");
-  //     icon.src = `${currentWeather[key]}`;
-  //     newDiv.appendChild(icon);
-  //   }
-  // });
-  // nowcastContainer.classList.add("visible");
+    // Fill div with data
+    for (const key in day) {
+      const newDiv = document.createElement("div");
+      newDiv.className = `${key}`;
+      newDiv.textContent = `${day[key]}`;
+      dayDiv.appendChild(newDiv);
+    }
+  });
 }
 
 function updateDisplay(data) {
