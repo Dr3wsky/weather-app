@@ -6,8 +6,11 @@ const searchInput = document.getElementById("city-search");
 // DOM handling and display generation, to be split into own module
 
 function setColors(div, data) {
+  let splitIdx;
+  ((div.classList[0] !== "forecast-day") ? splitIdx = 2 : splitIdx = 0);
   // Change background color to match weather conditions
-  switch (data.condition.split(" ")[2]) {
+  console.log(data.condition.split(" ")[splitIdx]);
+  switch (data.condition.split(" ")[splitIdx]) {
     case "Clear":
       div.style.backgroundColor = "white";
       break;
@@ -22,6 +25,18 @@ function setColors(div, data) {
       break;
     case "Light":
       div.style.backgroundColor = "rgba(220, 235, 241, 0.932)";
+      break;
+    case "Moderate":
+      div.style.backgroundColor = "rgba(161, 207, 226, 0.932)";
+      break;
+    case "Heavy":
+      div.style.backgroundColor = "rgba(83, 163, 197, 0.932)";
+      break;
+    case "Fog":
+      div.style.backgroundColor = "rgba(220, 235, 241, 0.932)";
+      break;
+    case "Patchy":
+      div.style.backgroundColor = "rgb(228, 229, 182)";
       break;
     default:
       div.style.backgroundColor = "white";
@@ -73,7 +88,7 @@ function makeNowcast(currentWeather) {
 }
 
 function makeForecast(forecastData) {
-  const forecastContainer = document.getElementById("forecast-container");
+  const forecastContainer = document.getElementById("forecast");
   if (forecastContainer.hasChildNodes()) {
     forecastContainer.innerHTML = "";
   }
@@ -87,6 +102,7 @@ function makeForecast(forecastData) {
     dayDiv.setAttribute("data-day-num", `${dayNum}`);
     forecastContainer.appendChild(dayDiv);
     dayDiv.classList.add("visible");
+    setColors(dayDiv, day);
 
     // Fill div with data
     for (const key in day) {
@@ -125,7 +141,7 @@ function parseData(data) {
     const willSnow = data.forecast.forecastday[day].day.daily_will_it_snow;
     forecast[day] = {
       date: data.forecast.forecastday[day].date,
-      condtionIcon: data.forecast.forecastday[day].day.condition.icon,
+      conditionIcon: data.forecast.forecastday[day].day.condition.icon,
       condition: data.forecast.forecastday[day].day.condition.text,
       sunrise: `Sunrise: ${data.forecast.forecastday[day].astro.sunrise}`,
       sunset: `Sunset: ${data.forecast.forecastday[day].astro.sunset}`,

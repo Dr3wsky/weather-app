@@ -132,6 +132,7 @@ input:focus {
   justify-content: center;
   align-items: flex-start;
   width: 100vw;
+  margin-top: 1.5rem;
   gap: 1.5rem;
 }
 .visible {
