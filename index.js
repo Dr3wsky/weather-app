@@ -72,11 +72,13 @@ function makeNowcast(currentWeather) {
   nowcastContainer.classList.add("visible");
 }
 
-function makeForcast(forcastData) {
+function makeForecast(forecastData) {
   const forecastContainer = document.getElementById("forecast");
   if (forecastContainer.hasChildNodes()) {
     forecastContainer.innerHTML = "";
   }
+
+  console.log(forecastData);
 
   // // Populate nowcast from data object
   // const keys = Object.keys(currentWeather);
@@ -99,7 +101,7 @@ function makeForcast(forcastData) {
 function updateDisplay(data) {
   makeCity(data.place);
   makeNowcast(data.current);
-  makeForcast(data.forcast);
+  makeForecast(data.forecast);
 }
 
 // Data handling, to be broken out into own module
@@ -118,6 +120,7 @@ function parseData(data) {
     feelsLike: `Gusting to ${data.current.gust_kph} kph, Feels like ${data.current.feelslike_c} °C`,
   };
 
+  const forecast = [];
   for (let day = 0; day < data.forecast.forecastday.length; day++) {
     const willSnow = data.forecast.forecastday[day].day.daily_will_it_snow;
     forecast[day] = {
@@ -132,7 +135,6 @@ function parseData(data) {
       precip: ((willSnow) ? `${data.forecast.forecastday[day].day.daily_chance_of_snow}% chance of snow` : `${data.forecast.forecastday[day].day.daily_chance_of_rain}% chance of rain`),
       precipTotal: ((willSnow) ? `${data.forecast.forecastday[day].day.totalsnow_cm}cm total snowfall` : `${data.forecast.forecastday[day].day.totalprecip_mm}mm total precipitation`),
     };
-    console.log(forecast[day]);
   }
   return { place, current, forecast };
 }
