@@ -126,6 +126,14 @@ input:focus {
   gap: 1.5rem;
 }
 
+.forecast-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100vw;
+  gap: 1.5rem;
+}
 .visible {
   border: 2px solid var(--primary-dark);
   border-radius: 5px;

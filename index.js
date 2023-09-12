@@ -73,7 +73,7 @@ function makeNowcast(currentWeather) {
 }
 
 function makeForecast(forecastData) {
-  const forecastContainer = document.getElementById("forecast");
+  const forecastContainer = document.getElementById("forecast-container");
   if (forecastContainer.hasChildNodes()) {
     forecastContainer.innerHTML = "";
   }
