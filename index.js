@@ -1,3 +1,4 @@
+/* eslint-disable guard-for-in */
 // const display = document.getElementById("display");
 const searchBtn = document.getElementById("search-btn");
 const form = document.getElementById("search-input");
@@ -105,11 +106,18 @@ function makeForecast(forecastData) {
     setColors(dayDiv, day);
 
     // Fill div with data
+    // eslint-disable-next-line no-restricted-syntax
     for (const key in day) {
       const newDiv = document.createElement("div");
       newDiv.className = `${key}`;
       newDiv.textContent = `${day[key]}`;
       dayDiv.appendChild(newDiv);
+      if (key === "conditionIcon") {
+        newDiv.innerHTML = "";
+        const icon = document.createElement("img");
+        icon.src = `${day[key]}`;
+        newDiv.appendChild(icon);
+      }
     }
   });
 }
