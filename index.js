@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable guard-for-in */
 // const display = document.getElementById("display");
 const searchBtn = document.getElementById("search-btn");
@@ -7,8 +8,7 @@ const searchInput = document.getElementById("city-search");
 // DOM handling and display generation, to be split into own module
 
 function setColors(div, data) {
-  let splitIdx;
-  ((div.classList[0] !== "forecast-day") ? splitIdx = 2 : splitIdx = 0);
+  const splitIdx = ((div.classList[0] !== "forecast-day") ? 2 : 0);
   // Change background color to match weather conditions
   console.log(data.condition.split(" ")[splitIdx]);
   switch (data.condition.split(" ")[splitIdx]) {
@@ -103,6 +103,7 @@ function makeForecast(forecastData) {
     dayDiv.setAttribute("data-day-num", `${dayNum}`);
     forecastContainer.appendChild(dayDiv);
     dayDiv.classList.add("visible");
+    dayDiv.classList.add("container");
     setColors(dayDiv, day);
 
     // Fill div with data
@@ -110,7 +111,15 @@ function makeForecast(forecastData) {
     for (const key in day) {
       const newDiv = document.createElement("div");
       newDiv.className = `${key}`;
-      newDiv.textContent = `${day[key]}`;
+      if (key === "date") {
+        if (dayNum === 0) {
+          newDiv.textContent = `Tomorrow: ${Date(day[key]).toString(5).substring(0, 10)}`;
+        } else {
+          newDiv.textContent = `${Date(day[key]).toString(5).substring(0, 10)}`;
+        }
+      } else {
+        newDiv.textContent = `${day[key]}`;
+      }
       dayDiv.appendChild(newDiv);
       if (key === "conditionIcon") {
         newDiv.innerHTML = "";
@@ -155,9 +164,9 @@ function parseData(data) {
       sunset: `Sunset: ${data.forecast.forecastday[day].astro.sunset}`,
       maxTemps: `High: ${data.forecast.forecastday[day].day.maxtemp_c} °C`,
       minTemps: `Low: ${data.forecast.forecastday[day].day.mintemp_c} °C`,
-      humidity: `${data.forecast.forecastday[day].day.avghumidity}% Humidity`,
-      precip: ((willSnow) ? `${data.forecast.forecastday[day].day.daily_chance_of_snow}% chance of snow` : `${data.forecast.forecastday[day].day.daily_chance_of_rain}% chance of rain`),
-      precipTotal: ((willSnow) ? `${data.forecast.forecastday[day].day.totalsnow_cm}cm total snowfall` : `${data.forecast.forecastday[day].day.totalprecip_mm}mm total precipitation`),
+      humidity: `Humidity: ${data.forecast.forecastday[day].day.avghumidity}% Humidity`,
+      precip: ((willSnow) ? `Precipitation: ${data.forecast.forecastday[day].day.daily_chance_of_snow}% chance` : `Precipitation: ${data.forecast.forecastday[day].day.daily_chance_of_rain}% chance`),
+      precipTotal: ((willSnow) ? `Total: ${data.forecast.forecastday[day].day.totalsnow_cm}cm snow` : `Total: ${data.forecast.forecastday[day].day.totalprecip_mm}mm rain`),
     };
   }
   return { place, current, forecast };
