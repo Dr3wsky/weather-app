@@ -122,19 +122,10 @@ input:focus {
   flex-wrap: wrap;
   justify-content: center;
   align-items: flex-start;
-  width: 100vw;
+  width: 75vw;
   gap: 1.5rem;
 }
 
-.forecast-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: flex-start;
-  width: 100vw;
-  margin-top: 1.5rem;
-  gap: 1.5rem;
-}
 .visible {
   border: 2px solid var(--primary-dark);
   border-radius: 5px;
@@ -153,7 +144,7 @@ input:focus {
 #city {
   background-color: var(--primary-light);
   min-width: 321px;
-  max-width: max-content;
+  max-width: fit-content;
   position: relative;
   flex: 1;
   align-self: stretch;
@@ -167,10 +158,20 @@ input:focus {
   text-align: center;
 }
 
-.forecast-day {
+#forecast {
+  width: 75vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(321px, 1fr));
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  margin-top: 1.5rem;
+  gap: 1.5rem;
 }
 
+.forecast-day {
+  max-width: 640px;
+}
 .footer {
   position: absolute;
   bottom: 0px;
@@ -202,8 +203,11 @@ input:focus {
     padding: 0px;
     overflow-x: scroll;
   }
-  .forecast-day,
   #city {
-    min-width: 534px;
+    max-width: min-content;
+  }
+
+  #forecast {
+    max-width: min-content;
   }
 }
