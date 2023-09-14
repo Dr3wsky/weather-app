@@ -10,7 +10,6 @@ const searchInput = document.getElementById("city-search");
 function setColors(div, data) {
   const splitIdx = ((div.classList[0] !== "forecast-day") ? 2 : 0);
   // Change background color to match weather conditions
-  console.log(data.condition.split(" ")[splitIdx]);
   switch (data.condition.split(" ")[splitIdx]) {
     case "Clear":
       div.style.backgroundColor = "white";
@@ -96,7 +95,6 @@ function makeForecast(forecastData) {
 
   let dayNum = 0;
   forecastData.forEach((day) => {
-    dayNum++;
     // Create Div for each day
     const dayDiv = document.createElement("div");
     dayDiv.className = "forecast-day";
@@ -112,14 +110,23 @@ function makeForecast(forecastData) {
       const newDiv = document.createElement("div");
       newDiv.className = `${key}`;
       if (key === "date") {
-        if (dayNum === 0) {
-          newDiv.textContent = `Tomorrow: ${Date(day[key]).toString(5).substring(0, 10)}`;
-        } else {
-          newDiv.textContent = `${Date(day[key]).toString(5).substring(0, 10)}`;
+        switch (dayNum) {
+          case 0:
+            newDiv.textContent = `Today: ${day[key]}`;
+            break;
+          case 1:
+            newDiv.textContent = `Tomorrow: ${day[key]}`;
+            break;
+          case 2:
+            newDiv.textContent = `Day After Torrow ${day[key]}`;
+            break;
+          default:
+            newDiv.textContent = "";
         }
       } else {
         newDiv.textContent = `${day[key]}`;
       }
+
       dayDiv.appendChild(newDiv);
       if (key === "conditionIcon") {
         newDiv.innerHTML = "";
@@ -128,6 +135,7 @@ function makeForecast(forecastData) {
         newDiv.appendChild(icon);
       }
     }
+    dayNum++;
   });
 }
 
