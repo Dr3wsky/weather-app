@@ -20,8 +20,11 @@ function setColors(div, data) {
     case "Partly":
       div.style.backgroundColor = "rgba(186, 231, 230, 0.983)";
       break;
+    case "Cloudy":
+      div.style.backgroundColor = "rgba(225, 225, 225, 0.9)";
+      break;
     case "Overcast":
-      div.style.backgroundColor = "rgb(204, 210, 210)";
+      div.style.backgroundColor = "rgb(225, 225, 225, 0.683)";
       break;
     case "Light":
       div.style.backgroundColor = "rgba(220, 235, 241, 0.932)";
@@ -74,7 +77,11 @@ function makeNowcast(currentWeather) {
   keys.forEach((key) => {
     const newDiv = document.createElement("div");
     newDiv.className = `${key}`;
-    newDiv.textContent = `${currentWeather[key]}`;
+    if (key === "condition") {
+      newDiv.innerHTML = `Current Weather<br>${currentWeather[key]}`;
+    } else {
+      newDiv.textContent = `${currentWeather[key]}`;
+    }
     nowcastContainer.appendChild(newDiv);
     // Create image for icon key
     if (key === "conditionIcon") {
@@ -112,16 +119,16 @@ function makeForecast(forecastData) {
       if (key === "date") {
         switch (dayNum) {
           case 0:
-            newDiv.textContent = `Today: ${day[key]}`;
+            newDiv.innerHTML = `Today<br>${day[key]}`;
             break;
           case 1:
-            newDiv.textContent = `Tomorrow: ${day[key]}`;
+            newDiv.innerHTML = `Tomorrow<br>${day[key]}`;
             break;
           case 2:
-            newDiv.textContent = `Day After Torrow ${day[key]}`;
+            newDiv.innerHTML = `Day After Torrow<br>${day[key]}`;
             break;
           default:
-            newDiv.textContent = "";
+            newDiv.innerHTML = "";
         }
       } else {
         newDiv.textContent = `${day[key]}`;
@@ -168,13 +175,13 @@ function parseData(data) {
       date: data.forecast.forecastday[day].date,
       conditionIcon: data.forecast.forecastday[day].day.condition.icon,
       condition: data.forecast.forecastday[day].day.condition.text,
-      sunrise: `Sunrise: ${data.forecast.forecastday[day].astro.sunrise}`,
-      sunset: `Sunset: ${data.forecast.forecastday[day].astro.sunset}`,
       maxTemps: `High: ${data.forecast.forecastday[day].day.maxtemp_c} °C`,
       minTemps: `Low: ${data.forecast.forecastday[day].day.mintemp_c} °C`,
       humidity: `Humidity: ${data.forecast.forecastday[day].day.avghumidity}% Humidity`,
       precip: ((willSnow) ? `Precipitation: ${data.forecast.forecastday[day].day.daily_chance_of_snow}% chance` : `Precipitation: ${data.forecast.forecastday[day].day.daily_chance_of_rain}% chance`),
       precipTotal: ((willSnow) ? `Total: ${data.forecast.forecastday[day].day.totalsnow_cm}cm snow` : `Total: ${data.forecast.forecastday[day].day.totalprecip_mm}mm rain`),
+      sunrise: `Sunrise: ${data.forecast.forecastday[day].astro.sunrise}`,
+      sunset: `Sunset: ${data.forecast.forecastday[day].astro.sunset}`,
     };
   }
   return { place, current, forecast };
