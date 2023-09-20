@@ -1,10 +1,11 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-param-reassign */
+/* eslint-disable guard-for-in */
+
 const display = (() => {
-  /* eslint-disable no-plusplus */
-  /* eslint-disable no-param-reassign */
-  /* eslint-disable guard-for-in */
+  // Switch background color of tile to match weather condition description
   function setColors(div, data) {
     const splitIdx = ((div.classList[0] !== "forecast-day") ? 2 : 0);
-    // Change background color to match weather conditions
     switch (data.condition.split(" ")[splitIdx]) {
       case "Clear":
         div.style.backgroundColor = "white";
@@ -41,8 +42,10 @@ const display = (() => {
     }
   }
 
+  // Make city tile from data object
   function makeCity(cityData) {
     const cityContainer = document.getElementById("city");
+    // Reset tiles if existing search displayed
     if (cityContainer.hasChildNodes()) {
       cityContainer.innerHTML = "";
     }
@@ -60,11 +63,14 @@ const display = (() => {
     cityContainer.classList.add("visible");
   }
 
+  // Make tile for current weather
   function makeNowcast(currentWeather) {
     const nowcastContainer = document.getElementById("nowcast");
+    // Reset tiles if existing search displayed
     if (nowcastContainer.hasChildNodes()) {
       nowcastContainer.innerHTML = "";
     }
+    // Set background color
     setColors(nowcastContainer, currentWeather);
 
     // Populate nowcast from data object
@@ -89,6 +95,7 @@ const display = (() => {
     nowcastContainer.classList.add("visible");
   }
 
+  // Make tiles for 3-day forcast
   function makeForecast(forecastData) {
     const forecastContainer = document.getElementById("forecast");
     if (forecastContainer.hasChildNodes()) {
@@ -104,6 +111,7 @@ const display = (() => {
       forecastContainer.appendChild(dayDiv);
       dayDiv.classList.add("visible");
       dayDiv.classList.add("container");
+      // Changwe background color for forcast
       setColors(dayDiv, day);
 
       // Fill div with data
@@ -111,6 +119,7 @@ const display = (() => {
       for (const key in day) {
         const newDiv = document.createElement("div");
         newDiv.className = `${key}`;
+        // Modify title of each tile
         if (key === "date") {
           switch (dayNum) {
             case 0:
@@ -144,6 +153,7 @@ const display = (() => {
     });
   }
 
+  // Run all funcs to make all tiles
   function updateDisplay(data) {
     makeCity(data.place);
     makeNowcast(data.current);
@@ -153,4 +163,4 @@ const display = (() => {
   return { updateDisplay };
 })();
 
-export default weather;
+export default display;

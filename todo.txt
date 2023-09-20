@@ -1,4 +1,0 @@
-To Do: 
-
-- Fine-tune forecast display
-- Make project into webpack with modules

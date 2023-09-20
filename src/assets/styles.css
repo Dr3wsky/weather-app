@@ -4,9 +4,7 @@
   --primary-light: rgba(139, 244, 241, 0.983);
   --secondary-light: rgba(220, 235, 241, 0.933);
   --test: rgba(225, 225, 225, 0.683);
-  --title-font: "Vanilla Whale";
   --primary-font: "Hack";
-  --secondary-font: "Philosopher";
 }
 
 *,
@@ -16,15 +14,6 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
-}
-
-@font-face {
-  font-family: "Vanilla Whale";
-  src: url("./fonts/VanillaWhale-Regular.woff2") format("woff2"),
-    url("./fonts/VanillaWhale-Regular.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
 }
 
 @font-face {
@@ -48,7 +37,7 @@ html body {
   font-size: 1.2rem;
   padding: 0px;
   margin: 0px;
-  font-family: Vanilla Whale, "Lucida", "Roboto";
+  font-family: Hack, "Lucida", "Roboto";
 }
 
 /* Main Property assignment */
@@ -187,14 +176,6 @@ input:focus {
 } /* Pulls focus to github link when hovered */
 
 @media screen and (max-width: 875px) {
-  html,
-  body {
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    overflow-x: scroll;
-  }
   #city {
     max-width: min-content;
   }
@@ -205,17 +186,8 @@ input:focus {
   }
 }
 
-/* @media screen and (min-width: 1775px) {
-  html,
-  body {
-    width: 100%;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    overflow-x: scroll;
-  }
-
+@media screen and (min-width: 1000px) {
   #forecast {
     grid-template-columns: repeat(3, minmax(321px, 1fr));
   }
-} */
+}
