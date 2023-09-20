@@ -152,3 +152,5 @@ const display = (() => {
 
   return { updateDisplay };
 })();
+
+export default weather;
