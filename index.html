@@ -1,9 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta charset="utf-8">
-    <title>Development</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1"><script defer src="index.bundle.js"></script><script defer src="weather.bundle.js"></script><script defer src="display.bundle.js"></script></head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forcast.io</title>
+    <link rel="shortcut icon" href="./weather_icon.ico" />
+    <script src="index.bundle.js" defer></script>
+  </head>
+
   <body>
+    <div class="main">
+      <div class="search-container" id="search-container">
+        <h1 id="title">What's the weather in _____ ?</h1>
+        <form id="search-input">
+          <label for="city-search">
+            <input
+              type="text"
+              id="city-search"
+              required
+              placeholder="Search a new city"
+              oninvalid="this.setCustomValidity(' ')"
+            />
+          </label>
+          <button class="btn-search" type="submit" id="search-btn">
+            GO
+          </button>
+        </form>
+
+        <div id="search-feedback" class="error-message"></div>
+      </div>
+      <div class="results-now-container">
+      <div id="city" class="container">
+      </div>
+      <div id="nowcast" class="container"></div>
+      </div>
+      <div id="forecast" class="forecast-container">
+
+      </div>
+      
+
+      <div class="footer">
+        <a class="am-github" href="https://github.com/Dr3wsky" target="_blank">
+          Copyright &copy Dr3wsky
+          <script>
+            document.write(new Date().getFullYear());
+          </script>
+        </a>
+      </div>
+    </div>
   </body>
 </html>
