@@ -1,3 +1,6 @@
+// Imports for webpack bundle
+import "./assets/styles.css";
+
 /* eslint-disable no-param-reassign */
 /* eslint-disable guard-for-in */
 // const display = document.getElementById("display");

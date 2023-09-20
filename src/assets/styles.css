@@ -19,18 +19,9 @@
 }
 
 @font-face {
-  font-family: "Philosopher";
-  src: url("./src/assets/fonts/Philosopher.woff2") format("woff2"),
-    url("./src/assets/fonts/Philosopher.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
   font-family: "Vanilla Whale";
-  src: url("./src/assets/fonts/VanillaWhale-Regular.woff2") format("woff2"),
-    url("./src/assets/fonts/VanillaWhale-Regular.woff") format("woff");
+  src: url("./fonts/VanillaWhale-Regular.woff2") format("woff2"),
+    url("./fonts/VanillaWhale-Regular.woff") format("woff");
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -38,8 +29,8 @@
 
 @font-face {
   font-family: Hack;
-  src: url("./src/assets/fonts/Hack-Regular.woff2") format("woff2"),
-    url("./src/assets/fonts/Hack-Regular.woff") format("woff");
+  src: url("./fonts/Hack-Regular.woff2") format("woff2"),
+    url("./fonts/Hack-Regular.woff") format("woff");
   font-weight: bold;
   font-style: normal;
 }
