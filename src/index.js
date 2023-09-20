@@ -1,9 +1,9 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable no-param-reassign */
+/* eslint-disable guard-for-in */
 // Imports for webpack bundle
 import "./assets/styles.css";
 
-/* eslint-disable no-param-reassign */
-/* eslint-disable guard-for-in */
-// const display = document.getElementById("display");
 const searchBtn = document.getElementById("search-btn");
 const form = document.getElementById("search-input");
 const searchInput = document.getElementById("city-search");

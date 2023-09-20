@@ -153,7 +153,7 @@ input:focus {
 #forecast {
   width: 75vw;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(321px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(321px, 1fr));
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -201,6 +201,7 @@ input:focus {
 
   #forecast {
     max-width: fit-content;
+    grid-template-columns: repeat(auto-fill, minmax(321px, 1fr));
   }
 }
 
