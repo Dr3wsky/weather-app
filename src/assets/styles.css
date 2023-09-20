@@ -152,7 +152,8 @@ input:focus {
 #forecast {
   width: 75vw;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(321px, 1fr));
+  grid-template-columns: repeat(3, minmax(321px, 1fr));
+  /* change to auto-fit if change to select forcast length */
   justify-content: center;
   align-items: center;
   text-align: center;

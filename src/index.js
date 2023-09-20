@@ -130,6 +130,9 @@ function makeForecast(forecastData) {
           case 2:
             newDiv.innerHTML = `Day After Torrow<br>${day[key]}`;
             break;
+          case 3:
+            newDiv.innerHTML = `Day After That<br>${day[key]}`;
+            break;
           default:
             newDiv.innerHTML = "";
         }
@@ -196,7 +199,7 @@ async function fetchData(city) {
     const searchFeedback = document.getElementById("search-feedback");
     searchFeedback.textContent = "Searching . . . ";
     const apiKey = "1fdeb95185c145f0809201723232908";
-    const apiEndpoint = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=3&aqi=yes&alerts=no`;
+    const apiEndpoint = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=4&aqi=yes&alerts=no`;
 
     const response = await fetch(apiEndpoint, { mode: "cors" });
     // Alert user if invalid city search
