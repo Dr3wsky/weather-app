@@ -1,6 +1,7 @@
-/* eslint-disable guard-for-in */
 const display = (() => {
-  // Change background of weather tile from condition description
+  /* eslint-disable no-plusplus */
+  /* eslint-disable no-param-reassign */
+  /* eslint-disable guard-for-in */
   function setColors(div, data) {
     const splitIdx = ((div.classList[0] !== "forecast-day") ? 2 : 0);
     // Change background color to match weather conditions
@@ -39,9 +40,8 @@ const display = (() => {
         div.style.backgroundColor = "white";
     }
   }
-  // Make city DOM from cleaned location data
+
   function makeCity(cityData) {
-    // Make new element and clear old data
     const cityContainer = document.getElementById("city");
     if (cityContainer.hasChildNodes()) {
       cityContainer.innerHTML = "";
@@ -49,7 +49,7 @@ const display = (() => {
     const titleUpdate = document.getElementById("title");
     titleUpdate.textContent = `What's the weather in ${cityData.city}?`;
 
-    // Populate DOM from city data object
+    // Populate city data from data object
     const keys = Object.keys(cityData);
     keys.forEach((key) => {
       const newDiv = document.createElement("div");
@@ -60,7 +60,6 @@ const display = (() => {
     cityContainer.classList.add("visible");
   }
 
-  //   Make DOM for current weather conditions
   function makeNowcast(currentWeather) {
     const nowcastContainer = document.getElementById("nowcast");
     if (nowcastContainer.hasChildNodes()) {
@@ -90,7 +89,6 @@ const display = (() => {
     nowcastContainer.classList.add("visible");
   }
 
-  //   Make DOM for weather forcase from cleaned data object
   function makeForecast(forecastData) {
     const forecastContainer = document.getElementById("forecast");
     if (forecastContainer.hasChildNodes()) {
@@ -124,6 +122,9 @@ const display = (() => {
             case 2:
               newDiv.innerHTML = `Day After Torrow<br>${day[key]}`;
               break;
+            case 3:
+              newDiv.innerHTML = `Day After That<br>${day[key]}`;
+              break;
             default:
               newDiv.innerHTML = "";
           }
@@ -142,4 +143,12 @@ const display = (() => {
       dayNum++;
     });
   }
-});
+
+  function updateDisplay(data) {
+    makeCity(data.place);
+    makeNowcast(data.current);
+    makeForecast(data.forecast);
+  }
+
+  return { updateDisplay };
+})();

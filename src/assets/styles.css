@@ -205,7 +205,7 @@ input:focus {
   }
 }
 
-@media screen and (min-width: 1775px) {
+/* @media screen and (min-width: 1775px) {
   html,
   body {
     width: 100%;
@@ -218,4 +218,4 @@ input:focus {
   #forecast {
     grid-template-columns: repeat(3, minmax(321px, 1fr));
   }
-}
+} */
