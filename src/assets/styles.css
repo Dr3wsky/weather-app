@@ -76,6 +76,7 @@ input {
   font-size: 1rem;
   margin: 1.5rem 0 1rem 0;
   padding: 0.5rem;
+  border-radius: 5px;
 }
 
 input:focus {
@@ -152,8 +153,7 @@ input:focus {
 #forecast {
   width: 75vw;
   display: grid;
-  grid-template-columns: repeat(3, minmax(321px, 1fr));
-  /* change to auto-fit if change to select forcast length */
+  grid-template-columns: repeat(auto-fit, minmax(321px, 1fr));
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -201,5 +201,20 @@ input:focus {
 
   #forecast {
     max-width: fit-content;
+  }
+}
+
+@media screen and (min-width: 1775px) {
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: scroll;
+  }
+
+  #forecast {
+    grid-template-columns: repeat(3, minmax(321px, 1fr));
   }
 }
